@@ -11,8 +11,14 @@ def imageLoader(URL,img_desc_file_name="img_desc_file.idf"):
     print "Loading web page : %s"%URL
     print "Please wait..."
     #fetch response
+
+    opener = urllib2.build_opener()
+    #spoof User-Agent
+    opener.addheaders = [('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36')]
+
     try :
-        response = urllib2.urlopen(URL)
+        response =  opener.open(URL)
+        #response = urllib2.urlopen(URL)
     except Exception as e:
         print "Error [ %s ]"%e
         return
@@ -28,8 +34,8 @@ def imageLoader(URL,img_desc_file_name="img_desc_file.idf"):
         #print img["alt"]
         img_url = img["src"];
         try :
-            img_file = urllib2.urlopen(img_url)
-
+            #img_file = urllib2.urlopen(img_url)
+            img_file = opener.open(img_url)
         except Exception as e:
             #ignore the error
             continue
@@ -57,9 +63,7 @@ def main():
         URL = sys.argv[1]
     else :
         URL = raw_input("Please enter the url ")
-
-    URL = 'http://all-free-download.com/free-photos/rose-flowers-jpg.html'
-    URL = 'http://crazzydunia.blogspot.in/p/saree.html'
+    URL = "http://profilepicturedp.weebly.com/cute-alia-bhat-picture.html"
     imageLoader(URL)
 
 
