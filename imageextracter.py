@@ -29,8 +29,8 @@ def imageLoader(URL,img_desc_file_name="img_desc_file.idf"):
     except Exception as e:
         print "Error [ %s ]"%e
         return
-    print "URL is",response.geturl()
-    print "Info ",response.info()
+    #print "URL is",response.geturl()
+    #print "Info ",response.info()
     soup = BeautifulSoup(response.read())
     print "Page loaded, searching for images in the response"
     imgs = soup.findAll("img",{"alt":True,"src":True}) #get src and title too
@@ -47,7 +47,7 @@ def imageLoader(URL,img_desc_file_name="img_desc_file.idf"):
                 imgurl=domain+img_url
             else :
                 imgurl=img_url
-
+            print "loading ",img_url
             #img_file = urllib2.urlopen(img_url)
             img_file = opener.open(imgurl)
         except Exception as e:
